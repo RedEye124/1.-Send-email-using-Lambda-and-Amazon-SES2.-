@@ -1,0 +1,25 @@
+By using  AWS services we can send a email conformation when we upload any object in the S3 Bucket
+
+STEP 1 :- Create a s3 bucket 
+
+Step 2 :- Create a IAM role. Next select  " Allow Lambda functions to call AWS services on your behalf ". 
+          Then attach permission  { AmazonS3FullAccess, CloudWatchFullAccess , AmazonSESFuIlAccess }.
+       
+step 3:- Create a lambda function. Select and language you are confortable, i have choosed  python 3.10. Next select in
+         permission select " Use an existing role" attach the role we created in step2 this will allow lambda what
+         all access it has on other aws services for this hands on.
+
+Step 4 :- Now  we have to add trigger of s3. Select the bucket which we created in step 1.
+          Set the event type as " All object create event" and acknowlwgde the recursive invocation.
+
+step 5 :- Paste the code which i provided . We use boto3 in it because if we want to invoke any other services. Boto 3 is A SDK (software development kit)
+          at the source and destination replace it with  the email you wanted to get notofication from SES.
+
+step 6 :-  Open SES and verify the email which you ant to use as the source. You will get an mail in the given email id , click on the link for the conformation. 
+
+strp 7 :- Deploy the code in lambda 
+
+Step 8 :- To test the function upload an file in the s3 buckret which you created in  step 1. You will get the mail as " notification mail to inform you regarding s3 event. 
+          The file FILE NAME is inserted in the Bucket Name bucket".
+
+step 9 :- To check the complete details go to lambda and select monitor and go to "view logs in cloudwatch" and select log groups. All the activity will be saved there.
